@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form th:action="@{/cafe/insert}" th:object="${cafe}" method="post">
+		
+		<input type="hidden" th:field="*{cafe_id}" />
+		
+		<label>카페 이름 : </label>
+		<input type="text" th:field="*{name}" /><br>
+		
+		<label>카페 위치 : </label>
+		<input type="text" th:field="*{location}" /><br>
+		
+		<label>카페 운영시간 : </label>
+		<input type="text" th:field="*{openhours}" /><br>
+		
+		<button type="submit">카페 정보 등록하기</button>
+	</form>
+	
+	<a th:href="@{/cafe}">메인으로</a>
+</body>
+</html>

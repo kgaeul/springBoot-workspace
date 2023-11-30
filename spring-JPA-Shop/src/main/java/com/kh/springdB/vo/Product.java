@@ -9,31 +9,29 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="Products")
+@Table(name="Product")
 
 
 public class Product {
 	
-//	@GeneratedValue(strategy=GenerationType.SEQUENCE , generator="sequence_name")
-//	@SequenceGenerator(name="product_sequence",
-//						sequenceName="product_seq",
-//						allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE , generator="sequence_name")
+	@SequenceGenerator(name="product_sequence",sequenceName="product_seq",allocationSize=1)
 	//MySQL에서 사용하는 방법 -> 
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	//@Column(name="product_id")
+	@Column(name="product_id")
 	private Long product_id;
 	
-	//@Column(nullable=false, length=50)
+	@Column(nullable=false, length=50)
 	private String product_name;
 	
-	//@Column(nullable=false, length=50)
+	@Column(nullable=false, length=50)
 	private String category;
 	
-	//@Column(name="price")
-	private String price;
+	@Column(name="price")
+	private Double price;
 	
+	@Column(name="stock_quantity")
 	private int stock_quantity;
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<title>product_list</title>
@@ -17,6 +17,7 @@
 					<th>갯수</th>
 				</tr>
 			</thead>
+			
 			<tbody>
 				<tr th:each="product : ${products}">
 					<td th:text="${product.product_id}"></td>
@@ -24,10 +25,13 @@
 					<td th:text="${product.category}"></td>
 					<td th:text="${product.price}"></td>
 					<td th:text="${product.stock_quantity}"></td>
-					<td><a href="@{/products/details/{id}(id=${product.product_id})}">상세보기 클릭</a></td>
+					<td><a th:href="@{/products/details/{id}(id=${product.product_id})}">상세보기 클릭</a></td>
+					<td><a th:href="@{/products/delete/{id}(id=${product.product_id})}">상세보기 클릭</a></td>
 				</tr>
 			</tbody>
-			
 		</table>
+		<a th:href="@{/products/new}">새로운 제품 추가하기</a>
+		<a th:href="@{/products/delete/all}">제품모두 삭제하기</a>
+		
 	</body>
 </html>

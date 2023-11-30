@@ -30,9 +30,12 @@ public class ProductService {
 	public List<Product> getAllProduct(){
 		return productRepository.findAll();
 	}
+	
+	//아이디 하나 조회
 	public Optional<Product> getProductById(Long id){
 		return productRepository.findById(id);
 	}
+	
 	
 	public Product saveProduct(Product product) {
 		return productRepository.save(product);

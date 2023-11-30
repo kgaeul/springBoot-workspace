@@ -11,13 +11,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.springdB.service.ProductService;
 import com.kh.springdB.vo.Product;
 
 @Controller//리턴이 html 파일 @RestContoller는 html로 안감
-@RequestMapping("/product_list")
+@RequestMapping("/products")
+
+/* 
+@RequestMapping 공통으로 해당하는 주소
+@GetMapping 상세페이지 주소
+  */
 public class ProductController {
 
 	
@@ -29,7 +33,7 @@ public class ProductController {
 	}
 	
 	//모든 제품 보기
-	@GetMapping("/list")
+	@GetMapping
 	public String getAllProduct(Model model) {
 		List<Product> p = productService.getAllProduct();
 		model.addAttribute("products",p);
@@ -37,14 +41,22 @@ public class ProductController {
 	}
 	
 	//하나의 제품 상세보기
-	@GetMapping("/detail/{id}")
+	@GetMapping("/details/{id}")
 	public String getProductById(@PathVariable Long id,Model model){
 		 Optional<Product> p=productService.getProductById(id);
 		 p.ifPresent(value -> model.addAttribute("product",value));
 		return "product_detail";
 	}
 	
-	//작성한 내용을 저장
+	//수정하기
+	@GetMapping("/update/{id}")
+	public String updateProduct(@PathVariable Long id, Model model) {
+		Optional<Product> p = productService.getProductById(id);
+		return "product_form";
+	}
+	//저장하는 메서드
+	//최초 작성내용 저장
+	//기존 작성내용 수정
 	@GetMapping("/new")
 	public String showProductForm(Model model) {
 		model.addAttribute("product",new Product());
@@ -54,12 +66,12 @@ public class ProductController {
 	//추가하기
 	@PostMapping("/save")
 	public String saveProduct(@ModelAttribute Product product ) {
-		productService.saveProduct(product );
+		productService.saveProduct(product);
 		return "redirect:/products";
 	}
 	
 	//삭제하기
-	@GetMapping("/delete{id}")
+	@GetMapping("/delete/{id}")
 	public String deleteProduct(@PathVariable Long id) {
 		productService.deleteProductById(id);
 		return "redirect:/products";
