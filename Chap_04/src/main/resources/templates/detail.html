@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<table border="1">
+	<thead>
+		<tr>
+			<th>아이디</th>
+			<th>이름</th>
+			<th>주소</th>
+			<th>가입일</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="u:${user}">
+			<td th:text="${u.userId}"></td>
+			<td th:text="${u.userName}"></td>
+			<td th:text="${u.userAddr}"></td>
+			<td th:text="${u.regDate}"></td>
+			
+		</tr>
+	</tbody>
+	
+</table>
+</body>
+</html>
