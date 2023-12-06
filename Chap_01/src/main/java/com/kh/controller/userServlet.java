@@ -18,8 +18,6 @@ public class userServlet extends HttpServlet {
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	
 		//사용자로부터 입력받은 데이터 처리 및 DAO 호출 작업을 수행
 			try {
 				List<DTO> user = DAO.selectUser(request.getParameter("search_user_name"));

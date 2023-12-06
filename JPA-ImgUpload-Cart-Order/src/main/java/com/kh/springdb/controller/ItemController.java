@@ -1,53 +1,63 @@
 package com.kh.springdb.controller;
 
+import java.util.List;
+
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
-import com.kh.springdb.model.vo.item;
+
+
+import com.kh.springdb.model.vo.Item;
 import com.kh.springdb.service.ItemService;
 
+
+
 @Controller
-@RequestMapping("itemList")
+@RequiredArgsConstructor
 public class ItemController {
 
-	@Autowired
-	private ItemService service;
-	
-	
-	//추가할 거 작성
-	@GetMapping("/new")
-	public String addItem() {
-		return "item";
-	}
-	
-	//저장
-	@PostMapping("/save")
-	public String saveItem(item item,MultipartFile photoFile) {
-		service.addItem(item, photoFile);
-		return "redirect:/itemList";
-	}
-	
-	//상세
-	@GetMapping("/view/{id}")
-	public String viewItem(Model model, @PathVariable("id") Integer id) {
-		model.addAttribute("item", service.getItemById(id));
-		return "viewItem";
-	}
-	
-	//수정
-	
-	
-	//삭제
-	@GetMapping("/delete/{id}")
-	public String deleteItem(@PathVariable("id") Integer id) {
-		service.itemDelete(id);
-		return "redirect:/itemList";
-	}
+    private final ItemService itemService;
+
+    // 메인 페이지 html 하나로 통일
+    // 메인 페이지 (로그인 안 한 유저) /localhost:8080
+    @GetMapping("/index")
+    public String mainPageNoneLogin(Model model) {
+        // 로그인을 안 한 경우
+        List<Item> items = itemService.allItemView();
+        model.addAttribute("items", items);
+        return "index";
+    }
+
+    // 상품 등록 페이지 - 판매자만 가능
+    @GetMapping("/item/new")
+    public String itemSaveForm(Model model) {
+            return "additemForm";
+      
+    }
+
+    // 상품 등록 (POST) - 판매자만 가능
+    @PostMapping("/item/new")
+    public String itemSave(Item item, MultipartFile imgFile) throws Exception {
+     
+            itemService.saveItem(item, imgFile);
+            return "redirect:/main";
+       
+    }
+
+
+
+    // 상품 리스트 페이지 - 로그인 안 한 유저
+    @GetMapping("/nonlogin/item/list")
+    public String itemList(Model model, Item items) {
+        model.addAttribute("items", items);
+        return "itemList";
+    }
 }
 
 

@@ -17,6 +17,5 @@ public class OracleConnectionProvider {
 		} catch (ClassNotFoundException e) {
 			throw new SQLException("JDBC 드라이버를 찾을 수 없습니다.",e);
 		}
-		
 	}
 }

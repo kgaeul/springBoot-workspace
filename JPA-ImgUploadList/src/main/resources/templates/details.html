@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<head>
+	<style>
+	.container{
+		
+	}
+	
+	.product{
+		border: 5px solid rgb(128, 128, 128);
+		text-align: center;
+		box-shadow: 6px 6px 0px rgb(79, 79, 79);
+		padding: 5px 5px 5px 5px;
+		width:300px;
+		border-radius: 20px;
+	}
+	
+	a{
+		text-decoration-line: none;
+		padding-right: 100px;
+		color:white;
+		font-weight: 900;
+	}
+	
+	#menu{
+		background-color: black;
+		height: 40px;
+		padding-top: 1%;
+		text-align: center;
+	}
+	
+	h1{
+		text-align: center;
+	}
+	
+	</style>
+</head>
+<body>
+
+
+<h1>상품 목록</h1>
+	<div th:if="${items !=null}">
+		
+		<div id="menu">
+		<a th:href="@{/item/new}">상품추가하기</a>
+		<a th:href="@{/item/list}">목록으로 돌아가기</a>
+		</div>
+		
+		<br><br>
+		
+		<div class="product">
+		<div th:if="${items.imgName !=null and items.imgPath !=null}">
+		<img style="width:200px;"
+		th:src="@{${items.getImgPath()}}"/>
+		</div>
+		
+		<div th:unless="${items.imgName !=null and items.imgPath !=null}">
+		<img style="width:200px;" th:src="@{/img/bear.png}">
+		</div>
+			
+		<br>
+			
+		<label>상품명 : </label>
+		<span th:text="${items.name}"></span>
+		<br>
+		<label>상품가격 : </label>
+		<span th:text="${items.price}"></span>
+		<br>
+			
+		<label>상품설명 : </label>
+		<span th:text="${items.text}"></span>
+		<br>
+			
+		<label>상품재고 : </label>
+		<span th:text="${items.stock}"></span>
+		<br>
+			
+		<label>1인당 최대구매수량 : </label> 
+		<span th:text="${items.count}"></span>
+		<br>
+			</div>
+	</div>
+
+</body>
+</html>

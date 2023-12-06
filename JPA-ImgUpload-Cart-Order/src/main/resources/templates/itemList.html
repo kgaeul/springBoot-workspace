@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>어텀이네 쇼핌몰</h1>
+	<div th:each="item : ${items}">
+		<img th:src="@{${item.getPhotoPath}}" />
+		<h4 th:"${item.getName()}">아이템 이름</h4>
+		<p th:text="${item.getPrice()">아이템 가격</p>
+	</div>
+	
+</body>
+</html>
