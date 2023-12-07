@@ -49,7 +49,8 @@ public class ItemService {
 		
 	}
 	
-	public Item getByItem(Integer id){
+	//아이템 상세보기나 수정하기를 할 수 있는 메서드 작성
+	public Item getItemById(int id){
 		return itemRepository.findItemById(id);
 		
 	}

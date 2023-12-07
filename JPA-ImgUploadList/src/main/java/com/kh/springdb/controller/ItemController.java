@@ -33,7 +33,7 @@ public class ItemController {
 	
 	@GetMapping("/item/details/{id}")
 	public String detailPage(@PathVariable("id") Integer id,Model model) {
-		Item item = itemService.getByItem(id);
+		Item item = itemService.getItemById(id);
 		model.addAttribute("items", item);
 		return "details";
 	}
@@ -56,7 +56,7 @@ public class ItemController {
 	//실제로 DB에 등록하는 애
 	@PostMapping("/item/new")
 	public String itemSave(Item item, MultipartFile imgFile) throws IllegalStateException, IOException {
-		itemService.saveItem(item, imgFile);
+			itemService.saveItem(item, imgFile);
 		return "redirect:/item/list";
 	}
 

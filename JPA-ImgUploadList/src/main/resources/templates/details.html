@@ -5,17 +5,12 @@
 <title>Insert title here</title>
 <head>
 	<style>
-	.container{
-		
-	}
 	
 	.product{
-		border: 5px solid rgb(128, 128, 128);
+		border: 1px solid rgb(192, 192, 192);
 		text-align: center;
-		box-shadow: 6px 6px 0px rgb(79, 79, 79);
 		padding: 5px 5px 5px 5px;
 		width:300px;
-		border-radius: 20px;
 	}
 	
 	a{
@@ -42,7 +37,7 @@
 
 
 <h1>상품 목록</h1>
-	<div th:if="${items !=null}">
+	<div class="container" th:if="${items !=null}" style="text-align: center;">
 		
 		<div id="menu">
 		<a th:href="@{/item/new}">상품추가하기</a>
@@ -51,20 +46,16 @@
 		
 		<br><br>
 		
-		<div class="product">
+		<h2><span th:text="${items.name}"></span></h2>
+		
 		<div th:if="${items.imgName !=null and items.imgPath !=null}">
-		<img style="width:200px;"
-		th:src="@{${items.getImgPath()}}"/>
+		<img style="height:500px;" th:src="@{${items.getImgPath()}}"/>
 		</div>
 		
 		<div th:unless="${items.imgName !=null and items.imgPath !=null}">
-		<img style="width:200px;" th:src="@{/img/bear.png}">
+		<img style="height:500px;" th:src="@{/img/bear.png}">
 		</div>
 			
-		<br>
-			
-		<label>상품명 : </label>
-		<span th:text="${items.name}"></span>
 		<br>
 		<label>상품가격 : </label>
 		<span th:text="${items.price}"></span>
@@ -81,7 +72,6 @@
 		<label>1인당 최대구매수량 : </label> 
 		<span th:text="${items.count}"></span>
 		<br>
-			</div>
 	</div>
 
 </body>

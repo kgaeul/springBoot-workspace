@@ -3,35 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <title>업로드 페이지</title>
+	<style>
+	.container{
+		text-align: center;
+		padding-top: 100px;
+	}
+	
+	.product{
+		border: 1px solid rgb(192, 192, 192);
+		text-align: center;
+		padding: 5px 5px 5px 5px;
+		width:300px;
+	}
+	
+	a{
+		text-decoration-line: none;
+		padding-right: 100px;
+		color:white;
+		font-weight: 900;
+	}
+	
+	#menu{
+		background-color: black;
+		height: 40px;
+		padding-top: 1%;
+		text-align: center;
+	}
+	
+	h1{
+		text-align: center;
+	}
+	
+	label{
+		font-size: 18px;
+		font-weight: 900;
+	}
+	
+	</style>
 </head>
 <body>
 	<h1>상품 이미지 및 상품 내용 업로드</h1>
+	
+		<div id="menu">
+		<a th:href="@{/item/new}">상품추가하기</a>
+		<a th:href="@{/item/list}">목록으로 돌아가기</a>
+		</div>
+	<div class="container">
 	<form th:action="@{/item/new}" method="post" enctype="multipart/form-data">
 		<label>상품 판매 & 품절 유무</label>
-		<input type="radio" name="isSoldout" id="isSoldout" value="0">판매중<br>
+		<br>
+		<input type="radio" name="isSoldout" id="isSoldout" value="0">판매중
 		<input type="radio" name="isSoldout" id="isSoldout" value="1">재고없음<br>
+		<br>
 		
-		<label>상품명</label>
-		<input type="text" name="name" id="name" placeholder="상품명을 입력해주세요" required/><br>
+		<label>상품명 : </label>
+		<input type="text" name="name" id="name" placeholder="상품명을 입력해주세요" required/><br><br>
 		
-		<label>상품설명</label>
-		<input type="text" name="text" id="text" placeholder="상품설명을 입력해주세요"required/><br>
+		<label>상품설명 : </label>
+		<input type="text" name="text" id="text" placeholder="상품설명을 입력해주세요"required/><br><br>
 		
-		<label>상품가격</label>
-		<input type="number" name="price" id="price" placeholder="상품가격을 입력해주세요"required/><br>
+		<label>상품가격 : </label>
+		<input type="number" name="price" id="price" placeholder="상품가격을 입력해주세요"required/><br><br>
 		
-		<label>주문 갯수</label>
-		<input type="number" min="1" max="10" name="count" id="count" required/><br>
+		<label>주문 갯수 : </label>
+		<input type="number" min="1" max="10" name="count" id="count" required/><br><br>
 		
-		<label>상품 재고</label>
-		<input type="number" name="stock" id="stock" placeholder="상품재고를 입력해주세요"required/><br>
+		<label>상품 재고 : </label>
+		<input type="number" name="stock" id="stock" placeholder="상품재고를 입력해주세요"required/><br><br>
 		
-		<label>상품 사진 등록</label>
-		<input type="file" name="imgFile" id="imgFile" /><br>
+		<label>상품 사진 등록 : </label>
+		<input type="file" name="imgFile" id="imgFile" /><br><br>
 		
 		<button type="submit">상품등록</button>
 		
 	</form>
-
+</div>
 </body>
 </html>

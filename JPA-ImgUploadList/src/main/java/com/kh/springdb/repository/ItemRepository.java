@@ -6,5 +6,5 @@ import com.kh.springdb.model.Item;
 
 public interface ItemRepository extends JpaRepository<Item,Integer>{
 
-	Item findItemById(Integer id);
+	Item findItemById(int id);
 }

@@ -41,7 +41,7 @@ public class Item {
 	//상품 주문 개수
 	private int count;
 	
-	private int price;
+	private String price;
 	
 	//재고
 	private int stock;
