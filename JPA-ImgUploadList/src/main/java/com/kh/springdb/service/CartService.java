@@ -10,6 +10,7 @@ import com.kh.springdb.model.CartItem;
 import com.kh.springdb.model.Item;
 import com.kh.springdb.model.Order;
 import com.kh.springdb.repository.CartItemRepository;
+import com.kh.springdb.repository.CartRepository;
 import com.kh.springdb.repository.ItemRepository;
 import com.kh.springdb.repository.OrderRepository;
 
@@ -93,7 +94,7 @@ public class CartService {
 			orderRepository.save(order);
 			
 			//delete clear
-			cartRepository.deleteAll();
+			carItemRepository.deleteAll();
 			cart.getCartItems().clear();
 			cartRepository.save(cart);
 		}

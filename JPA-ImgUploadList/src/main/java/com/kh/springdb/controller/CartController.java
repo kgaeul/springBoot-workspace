@@ -18,7 +18,7 @@ import com.kh.springdb.service.CartService;
 import com.kh.springdb.service.ItemService;
 
 @Controller
-@RequestMapping("/cart")
+@RequestMapping("cart")
 public class CartController {
 
 	@Autowired
@@ -48,7 +48,7 @@ public class CartController {
 		Item newItem = itemService.getItemById(itemId);
 		/*@PathVariable Long itemId
 		만약에 파라미터 값이 Long일 경우에는 longValue()작성을 해주고 intValue() Integer 쓴 객체를 int로 변환하는 메서드
-		Integer와 Integer의 차이
+		Integer와 int의 차이
 		Integer = Wrapper클래스로 감싸져 있기 때문에 null 값을 가질 수 있음
 		int = 자바에서 기본 데이터 타입, 정수를 나타내기 때문에 null값을 가질 수 없음
 		*/
