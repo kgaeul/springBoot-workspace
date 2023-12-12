@@ -46,7 +46,8 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	
+	//post insert update
+	//로그인은 select
 	@GetMapping("/login")
 	public String login() {
 		return "login_form";

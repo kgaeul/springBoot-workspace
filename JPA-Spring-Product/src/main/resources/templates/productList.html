@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+	*{
+		text-align: center;
+	}
+	
+	.container{
+			background-color: white;
+		}
+		
+	a{
+		text-decoration: none;
+		margin-left: 100px;
+		color: black;
+	}	
+	
+	.menu{
+	padding: 10px;
+	margin-bottom: 30px;
+	box-shadow: 0 6px 0 black;
+	}
+	
+	#mainlogo{
+		color: black;
+		font-weight: 900;
+	}
+	
+	#form{
+		border: 1px solid gray;
+		text-align: left;
+		padding: 10px;
+		float :left;
+		margin-right: 100px;
+	}
+	
+	#detail{
+	margin-right:100px;
+	border: 1px solid gray;
+	padding:3px;
+	border-radius: 3px;
+	font-size: 14px;
+	background-color: rgb(238, 238, 238);
+	float:left;
+	}
+	
+	li{
+		list-style: none;
+		float:left;
+		text-align: center;
+	}
+	#pagination{
+		margin-left: 600px;
+	}
+	
+	#box{
+		width:1300px;
+		height: 600px;
+	}
+	
+</style>
+</head>
+<body>
+	
+		<h2><a id="mainlogo" th:href="@{/product}">어텀나라</a></h2>
+		<br>
+		<br>
+		
+		<div class="menu">
+			<a th:href="@{/product}">상품 리스트</a>
+			<a th:href="@{/product/new}">상품등록</a>
+			<a>로그인</a>
+			<a>로그아웃</a>
+			<a>회원가입</a>
+		</div>
+	
+	<div id="box">
+		<div id="form" th:each="product, loop : ${paging.content}" >
+			<img th:src="@{${product.getImgPath()}}" style="width:300px;"/>
+			<p type="checkbox"></p>
+			
+			아이디 :<h th:text="${product.id}"></h>
+			<br>
+			가격 : <h th:text="${product.price}"></h>원
+			<br>
+			제품명 : <h th:text="${product.name}"></h>
+			<br>
+			<a th:href="@{/product/details/{id}(id=${product.id})}" id="detail" >제품 상세보기</a>
+			<form th:action="@{/cart/add}" method="post">
+				<input type="hidden" name="productId" th:value="${product.id}">
+				<button>구매하기</button>
+				<button type="submit">장바구니에 담기</button>
+			</form>
+		</div>
+	</div>
+	
+	<!--
+		페이징을 하기 위한 번호 목록 만들어주기
+		paging.isEmpty = 게시물이 존재하는 지 존재하지 않는 지 체크
+		paging.totalElements = 전체 게시물 개수
+		paging.totalPages = 전체 페이지 개수
+		paging.size = 페이지 당 보여줄 게시물 수
+		paging .number = 현재 페이지 번호
+		paging.hasPrevious= 이전 페이지가 존재하는 지 확인하는 존재여부
+		paging.hasNext = 다음 페이지가 존재하는 지 다음페이지가 없으면 막을 수 있도록 확인해주는 여부
+		
+	-->
+	<div th:if="${!paging.isEmpty()}" id="pagination">
+		<ul>
+			<li th:classappend="${!paging.hasPrevious}?'disabled'">
+				<a th:href="@{|?page=${paging.number-1}|}">
+					<span><</span>
+				</a>
+			</li>
+			<li th:each="page:${#numbers.sequence(1, paging.totalPages-1)}"
+			th:classappend="${page == paging.number}?'active'">
+				<a th:text="${page}" th:href="@{|?page=${page}|}">
+					<span>현재페이지로 지울 예정</span>
+				</a>
+			</li>
+			<li th:classappend="${!paging.hasNext}?'disabled'">
+				<a th:href="@{|?page=${paging.number+1}|} ">
+					<span>></span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+
+</body>
+</html>

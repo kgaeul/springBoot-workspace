@@ -30,7 +30,6 @@ public class ItemService {
 	//상품을 등록할 수 있는 메서드
 	//이미지를 넣어주기 위해서 파일을 파라미터에 받겠다 작성해줄것
 	public void saveItem(Item item, MultipartFile imgFile) throws IllegalStateException, IOException {
-		
 		//파일 원본 이름
 		String originName = imgFile.getOriginalFilename();
 		

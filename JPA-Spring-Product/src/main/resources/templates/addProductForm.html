@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	*{
+		text-align: center;
+	}
+	
+	.container{
+			background-color: white;
+		}
+		
+	a{
+		text-decoration: none;
+		margin-left: 100px;
+		color: black;
+	}
+	
+	.menu{
+	padding: 10px;
+	margin-bottom: 30px;
+	box-shadow: 0 6px 0 black;
+	}
+	#mainlogo{
+		color: black;
+		font-weight: 900;
+	}
+	
+</style>
+</head>
+<body>
+
+<h2><a id="mainlogo" th:href="@{/product/list}">어텀나라</a></h2>
+		<br>
+		<br>
+		
+		<div class="menu">
+			<a th:href="@{/product/list}">상품 리스트</a>
+			<a th:href="@{/product/new}">상품등록</a>
+		</div>
+		
+	<div class="container">
+	<h3>상품 추가하기</h3>	
+	<form th:action="@{/product/new}" method="post" enctype="multipart/form-data">
+		
+		<label>상품명 : </label>
+		<input type="text" name="name" required/>
+		
+		<label>재고수량 : </label>
+		<input type="text"  name="stock_quantity" id="stock_quantity"  style="width:30px;"required/>
+		<br>
+		<br>
+		
+		<label>가격 : </label>
+		<input type="number" name="price" id="price" style="width:90px;"required/>원
+		
+		<label>판매여부: </label>
+		<input type="radio" name="isSoldout" id="isSoldout" value="0" required/>판매중
+		<input type="radio" name="isSoldout" id="isSoldout" value="1" required/>품절
+		<br>
+		<br>
+		
+		<label>상품 설명 : </label>
+		<input type="text" name="description" id="description" style="width:400px;height:200px;" required/>
+		<br>
+		<br>
+		
+		<label>1인당 최대구매수량 : </label>
+		<input type="number" name="count" id="count"  required/>
+		<br>
+		<br>
+		
+		<label>이미지 추가: </label>
+		<input type="file" name="imgFile" id="imgFile"  required/>
+		<br>
+		<br>
+		
+		<button type="submit">상품 등록하기</button>
+	</form>
+	</div>
+</body>
+</html>
