@@ -64,7 +64,6 @@
 </style>
 </head>
 <body>
-	
 		<h2><a id="mainlogo" th:href="@{/product}">어텀나라</a></h2>
 		<br>
 		<br>
@@ -106,8 +105,8 @@
 		paging .number = 현재 페이지 번호
 		paging.hasPrevious= 이전 페이지가 존재하는 지 확인하는 존재여부
 		paging.hasNext = 다음 페이지가 존재하는 지 다음페이지가 없으면 막을 수 있도록 확인해주는 여부
-		
 	-->
+	
 	<div th:if="${!paging.isEmpty()}" id="pagination">
 		<ul>
 			<li th:classappend="${!paging.hasPrevious}?'disabled'">
@@ -128,7 +127,5 @@
 			</li>
 		</ul>
 	</div>
-	
-
 </body>
 </html>

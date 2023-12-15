@@ -1,7 +1,6 @@
 package com.kh.springdb.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +24,6 @@ public class ProductController {
 
 	@Autowired
 	ProductService pService;
-	
 //	@GetMapping("/product")
 //	public String AllProduct(Model model, product p) {
 //		List<product> products = pService.ProductList();
@@ -56,18 +54,16 @@ public class ProductController {
 	
 	@GetMapping("/product")
 	public String pageList(Model model, @RequestParam(value="page",defaultValue="0")int page){
-		
 		//첫페이지를 0으로 설정해서 null방지 우리눈에는 1로 보여도 코드 안에서는 0으로 시작하는 것으로 표기
 		//"page"라는 이름으로 받기로 결정
-		
 		//@RequestParam-> 어떤 값을 가지고 요청을 할 지 지정하기 위해 이용하는 것!
 		
 		Page<product> paging = pService.getList(page);
 		model.addAttribute("paging", paging);
 		return "productList";
-		
 	}
 	
+	@Autowired
 	private CommentService commentService;
 	
 	@PostMapping("/addComment")
@@ -76,4 +72,16 @@ public class ProductController {
 		return "redirect:/product/details/"+productId;
 	}
 	
+	@PostMapping("/deleteComment")
+	public String deleteComment(@RequestParam int commentId) {
+		commentService.deleteComment(commentId);
+		System.out.println(commentId);
+		return "index";
+	}
+	
+	@PostMapping("/updateComment")
+	public String addComment(@RequestParam String content, @RequestParam int commentId) {
+		commentService.addComment(commentId, content);
+		return "redirect:/product";
+	}
 }
