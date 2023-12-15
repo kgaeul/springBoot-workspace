@@ -60,7 +60,7 @@ public class ProductController {
 	}
 	
 	//상품 정보 수정하기
-	@GetMapping("/product/new/{id}")
+	@GetMapping("/update/{id}")
 	public String updateProduct(@PathVariable int productId) {
 		return "addProductForm";
 	}
@@ -72,7 +72,6 @@ public class ProductController {
 		//첫페이지를 0으로 설정해서 null방지 우리눈에는 1로 보여도 코드 안에서는 0으로 시작하는 것으로 표기
 		//"page"라는 이름으로 받기로 결정
 		//@RequestParam-> 어떤 값을 가지고 요청을 할 지 지정하기 위해 이용하는 것!
-		
 		Page<product> paging = pService.getList(page);
 		model.addAttribute("paging", paging);
 		return "productList";

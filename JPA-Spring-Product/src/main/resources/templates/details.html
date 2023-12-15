@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -65,22 +65,22 @@
 	<div id="form">
 		<br>
 		<br>
-		아이디 :<h th:text="${products.id}"></h>
+		아이디 :<span th:text="${products.id}"></span>
 		<br>
 		<br>
-		가격 : <h th:text="${products.price}"></h>원
+		가격 : <span th:text="${products.price}"></span>원
 		<br>
 		<br>
-		재고 수량: <h th:text="${products.stock_quantity}"></h>개
+		재고 수량: <span th:text="${products.stock_quantity}"></span>개
 		<br>
 		<br>
-		제품설명 : <h th:text="${products.description}"></h>
+		제품설명 : <span th:text="${products.description}"></span>
 		<br>
 		<br>
-		재고유무 : <h th:text="${products.isSoldout}"></h>
+		재고유무 : <span th:text="${products.isSoldout}"></span>
 		<br>
 		<br>
-		1인당 최대구매수량 : <h th:text="${products.count}"></h>
+		1인당 최대구매수량 : <span th:text="${products.count}"></span>
 		<br>
 		<br>
 		<input type="checkbox"></input>
@@ -88,8 +88,12 @@
 			<input type="hidden" name="productId" th:value="${products.id}">
 			<button type="submit">장바구니에 담기</button>
 		</form>
+		<form action="@{/addLike}" method="post">
+		<input type="hidden" name="id" th:value="${products.id}">
+		<button type="submit"></button>
+		</form>
 		
-		<a th:href="@{/product/new/{id}(id=${products.id})}">수정하기</a>
+		<a th:href="@{/update/{id}(id=${products.id})}">수정하기</a>
 		
 	</div>
 	

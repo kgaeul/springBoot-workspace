@@ -73,13 +73,13 @@
 		<img th:src="@{${product.getImgPath()}}" style="width:300px;"/>
 		<p type="checkbox"></p>
 		
-		아이디 :<h th:text="${product.id}"></h>
+		아이디 :<p th:text="${product.id}"></p>
 		<br>
-		가격 : <h th:text="${product.price}"></h>원
+		가격 : <p th:text="${product.price}"></p>원
 		<br>
-		제품명 : <h th:text="${product.name}"></h>
+		제품명 : <p th:text="${product.name}"></p>
 		<br>
-		재고유무 : <h th:text="${product.isSoldout}"></h>
+		재고유무 : <p th:text="${product.isSoldout}"></p>
 		<br>
 		<br>
 		<a th:href="@{/product/details/{id}(id=${product.id})}" id="detail" >제품 상세보기</a>
