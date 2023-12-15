@@ -56,14 +56,6 @@ public class controller {
 		return "redirect:/cafe";
 	}
 	
-	//상세페이지 조회
-	@GetMapping("/details/{id}")
-	public String selectOneCafe(@PathVariable Long id, Model model) {
-		Optional<cafe> onecafe = s.selectOneCafe(id);
-		onecafe.ifPresent(value -> model.addAttribute("cafe",value));
-		return "details";
-	}
-	
 	//수정하기
 	@GetMapping("/update/{id}")
 	public String updateCafe(@PathVariable Long id, Model model) {
@@ -72,9 +64,17 @@ public class controller {
 		return "cafesave";
 	}
 	
+	//상세페이지 조회
+	@GetMapping("/details/{id}")
+	public String selectOneCafe(@PathVariable Long id, Model model) {
+		Optional<cafe> onecafe = s.selectOneCafe(id);
+		onecafe.ifPresent(value -> model.addAttribute("cafe",value));
+		return "details";
+	}
+	
 	//삭제하기
 	@GetMapping("/delete/{id}")
-	public String deleteCafe(@PathVariable Long id, Model model) {
+	public String deleteCafe(@PathVariable Long id) {
 		s.deleteCafe(id);
 		return "redirect:/cafe";
 	}

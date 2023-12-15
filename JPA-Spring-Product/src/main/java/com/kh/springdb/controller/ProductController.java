@@ -52,6 +52,15 @@ public class ProductController {
 		return "index";
 	}
 	
+	
+	@GetMapping("/product/new/{id}")
+	public String updateProduct(@PathVariable int productId) {
+		product p = new product();
+		p.setId(productId);
+		return "addProductForm";
+	}
+	
+	
 	@GetMapping("/product")
 	public String pageList(Model model, @RequestParam(value="page",defaultValue="0")int page){
 		//첫페이지를 0으로 설정해서 null방지 우리눈에는 1로 보여도 코드 안에서는 0으로 시작하는 것으로 표기
@@ -67,21 +76,20 @@ public class ProductController {
 	private CommentService commentService;
 	
 	@PostMapping("/addComment")
-	public String addComment(@RequestParam int productId, @RequestParam String content) {
-		commentService.addComment(productId, content);
+	public String addComment(@RequestParam int productId, @RequestParam String content,@RequestParam int commentId) {
+		commentService.addComment(productId, content,commentId);
 		return "redirect:/product/details/"+productId;
 	}
-	
-	@PostMapping("/deleteComment")
-	public String deleteComment(@RequestParam int commentId) {
-		commentService.deleteComment(commentId);
-		System.out.println(commentId);
-		return "index";
+
+	@GetMapping("/deleteComment/{id}")
+	public String deleteComment(@PathVariable int id) {
+		commentService.deleteComment(id);
+		return "redirect:/index";
 	}
 	
-	@PostMapping("/updateComment")
-	public String addComment(@RequestParam String content, @RequestParam int commentId) {
-		commentService.addComment(commentId, content);
-		return "redirect:/product";
+	@PostMapping("/addLike")
+	public String addLike(@RequestParam int productId,@RequestParam int commentId) {
+		commentService.addLike(productId,commentId);
+		return "redirect:/product";		
 	}
 }
