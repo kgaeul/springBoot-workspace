@@ -24,6 +24,10 @@ public class ProductController {
 
 	@Autowired
 	ProductService pService;
+	
+	@Autowired
+	private CommentService commentService;
+	
 //	@GetMapping("/product")
 //	public String AllProduct(Model model, product p) {
 //		List<product> products = pService.ProductList();
@@ -41,26 +45,28 @@ public class ProductController {
 		return "details";
 	}
 	
+	
+	//새로운 상품 추가하기
 	@GetMapping("/product/new")
 	public String productSaveForm(Model model) {
 		return "addProductForm";
 	}
 	
+	//새로운 상품 저장하기
 	@PostMapping("/product/new")
 	public String productSave(product p, MultipartFile imgFile) throws Exception, IOException {
 		pService.CreateProduct(p, imgFile);
 		return "index";
 	}
 	
-	
+	//상품 정보 수정하기
 	@GetMapping("/product/new/{id}")
 	public String updateProduct(@PathVariable int productId) {
-		product p = new product();
-		p.setId(productId);
 		return "addProductForm";
 	}
 	
 	
+	//페이징 처리
 	@GetMapping("/product")
 	public String pageList(Model model, @RequestParam(value="page",defaultValue="0")int page){
 		//첫페이지를 0으로 설정해서 null방지 우리눈에는 1로 보여도 코드 안에서는 0으로 시작하는 것으로 표기
@@ -72,21 +78,21 @@ public class ProductController {
 		return "productList";
 	}
 	
-	@Autowired
-	private CommentService commentService;
-	
+	//댓글 추가
 	@PostMapping("/addComment")
 	public String addComment(@RequestParam int productId, @RequestParam String content,@RequestParam int commentId) {
 		commentService.addComment(productId, content,commentId);
 		return "redirect:/product/details/"+productId;
 	}
 
+	//댓글 삭제
 	@GetMapping("/deleteComment/{id}")
 	public String deleteComment(@PathVariable int id) {
 		commentService.deleteComment(id);
-		return "redirect:/index";
+		return "redirect:/product";
 	}
 	
+	//좋아요
 	@PostMapping("/addLike")
 	public String addLike(@RequestParam int productId,@RequestParam int commentId) {
 		commentService.addLike(productId,commentId);

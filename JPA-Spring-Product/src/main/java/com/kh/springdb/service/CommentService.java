@@ -18,6 +18,7 @@ public class CommentService {
 	@Autowired
 	private ProductRepository productRepository;
 	
+	//추가하기
 	public Comment addComment(int productId, String content,int commentId) {
 		product p = productRepository.findById(productId).orElse(null);
 		
@@ -33,10 +34,12 @@ public class CommentService {
 		return commentrepository.save(comment);
 	}
 	
+	//삭제하기
 	public void deleteComment(int commentId) {
 		commentrepository.deleteById(commentId);
 	}
 	
+	//좋아요
 	public Comment addLike(int productId,int commentId) {
 		product p = productRepository.findById(productId).orElse(null);
 		if(p==null) {
