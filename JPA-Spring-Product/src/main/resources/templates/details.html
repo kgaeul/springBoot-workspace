@@ -18,21 +18,31 @@
 		color: black;
 	}	
 	
+	#mainTitle{
+	background: url('./img/잠만보.png');
+	padding-top:200px;
+	height:200px;
+	}
+	
 	.menu{
 	padding: 10px;
-	margin-bottom: 30px;
-	box-shadow: 0 6px 0 black;
+	margin-top: 100px;
+	background-color: rgb(238, 238, 238);
+	opacity :0.8;
+	
 	}
 	
 	#mainlogo{
 		color: black;
-		font-weight: 900;
+		font-size:30px;
 	}
 	
 	#form{
 		text-align: left;
 		padding: 10px;
 		float:left;
+		width:1800px;
+		
 	}
 	
 	#detail{
@@ -47,17 +57,18 @@
 </style>
 </head>
 <body>
-<h2><a id="mainlogo" th:href="@{/product/list}">어텀나라</a></h2>
+	<div id="mainTitle">
+		<a id="mainlogo" th:href="@{/product}">어텀나라</a>
+			<div class="menu">
+				<a th:href="@{/product}">상품 리스트</a>
+				<a th:href="@{/product/new}">상품등록</a>
+				<a>로그인</a>
+				<a>로그아웃</a>
+				<a>회원가입</a>
+			</div>
+	</div>
 		<br>
 		<br>
-		
-		<div class="menu">
-			<a th:href="@{/product}">상품 리스트</a>
-			<a th:href="@{/product/new}">상품등록</a>
-			<a>로그인</a>
-			<a>로그아웃</a>
-			<a>회원가입</a>
-		</div>
 	
 	<h1 th:text="${products.name}"></h1>
 	<img th:src="@{${products.getImgPath()}}" style="width:500px;float:left;margin-left: 600px;"/>
@@ -83,25 +94,26 @@
 		1인당 최대구매수량 : <span th:text="${products.count}"></span>
 		<br>
 		<br>
-		<input type="checkbox"></input>
-		<form th:action="@{/cart/add}" method="post">
+		
+		<form action="@{/addLike}" style="display:inline;" method="post">
+		<input type="hidden" name="id" th:value="${products.id}">
+		<button style="	display:inline;background:none;border-radius:10px;border:3px solid rgb(255, 115, 115);color:rgb(255, 115, 115);font-size:15px;font-weight:900;" type="submit">💝 좋아요</button>
+		</form>
+		<form th:action="@{/cart/add}" style="display:inline;" method="post">
 			<input type="hidden" name="productId" th:value="${products.id}">
 			<button type="submit">장바구니에 담기</button>
 		</form>
-		<form action="@{/addLike}" method="post">
-		<input type="hidden" name="id" th:value="${products.id}">
-		<button type="submit"></button>
-		</form>
+		<a style="margin-left:0;font-size:14px;border-radius:3px;padding:2px;background-color: rgb(238, 238, 238);border:1px solid gray;" th:href="@{/product/new/{id}(id=${products.id})}">수정하기</a>
 		
-		<a th:href="@{/update/{id}(id=${products.id})}">수정하기</a>
-		
-	</div>
+	
 	
 	<div th:each="comment : ${products.comments}">
 		<p th:text="${comment.content}"></p>
 		<a th:href="@{/deleteComment/{id}(id=${comment.id})}">삭제하기</a>
 	</div>
-
+	<br>
+	<p></p>
+	</div>
 	
 	<form th:action="@{/addComment}" method="post">
 		<input type="hidden" name="productId" th:value="${products.id}">

@@ -60,9 +60,19 @@ public class ProductController {
 	}
 	
 	//상품 정보 수정하기
-	@GetMapping("/update/{id}")
-	public String updateProduct(@PathVariable int productId) {
-		return "addProductForm";
+	//@GetMapping("/product/new/{id}")
+	//public String updateProduct(@PathVariable int productId) {
+	//	return "addProductForm";
+	//}
+	
+	//상품 수정하기
+	@GetMapping("/product/new/{id}")
+	public String updateProduct(@PathVariable int id,Model model) {
+		//상세보기를 검색할 조건
+		product p = pService.ProductDetail(id);
+		//하나의 아이디 값을 가지고 와서 그 아이디가 속해있는 데이터를 product안에 저장한다는 의미
+		model.addAttribute("products",p);
+		return "updateProductForm";
 	}
 	
 	
